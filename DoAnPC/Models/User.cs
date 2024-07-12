@@ -7,77 +7,58 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Data.Entity;
-using System.ComponentModel.DataAnnotations;
-using System.Data.Entity.Infrastructure;
-
-
 namespace DoAnPC.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-   
 
-    
     public partial class User
     {
-       
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
+        {
+            this.OrderPro = new HashSet<OrderPro>();
+        }
+
         public int ID { get; set; }
 
-        [Required(ErrorMessage ="Không được bỏ trống")]
-        [StringLength(30)]
-        [Display(Name = "Tài Khoản")]
-        public string TaiKhoan  { get; set; }
+        [Display(Name = "Tên đăng nhập")]
+        [Required(ErrorMessage = "Không được để trống")]
+        public string TaiKhoan { get; set; }
 
-        [Required(ErrorMessage = "Không được bỏ trống")]
-        [StringLength(20)]
+
         [Display(Name = "Họ Tên")]
+        [Required(ErrorMessage = "Không được để trống")]
         public string HoTen { get; set; }
 
-        [Required(ErrorMessage = "Không được bỏ trống")]
-        [StringLength(50)]
+        [Display(Name = "Địa chỉ")]
+        [Required(ErrorMessage = "Không được để trống")]
+        public string DiaChi { get; set; }
+
+        [Display(Name = "Mail")]
+        [Required(ErrorMessage = "Không được để trống")]
+        [StringLength(50, MinimumLength = 10, ErrorMessage = "Độ dài {0} phải từ {2} đến {1} kí tự")]
         public string Mail { get; set; }
 
-        [Required(ErrorMessage = "Không được bỏ trống")]
-        [Display(Name = "Mật Khẩu")]
-        [StringLength(30,MinimumLength =6, ErrorMessage ="Mật khẩu phải có độ dài từ {2} đến {1} kí tự")]
+        [Display(Name = "Mật khẩu")]
+        [Required(ErrorMessage = "Không được để trống")]
+        [StringLength(30, MinimumLength = 6, ErrorMessage = "Độ dài {0} phải từ {2} đến {1} kí tự")]
+        [DataType(DataType.Password)]
         public string MatKhau { get; set; }
+
+        [NotMapped]
+        [Compare("MatKhau")]
+        [DataType(DataType.Password)]
+        [DisplayName("Nhập lại mật khẩu: ")]
+        [StringLength(30, MinimumLength = 6, ErrorMessage = "Độ dài {0} phải từ {2} đến {1} kí tự")]
+        public string NhaplaiMatKhau { get; set; }
+
+
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderPro> OrderPro { get; set; }
     }
 }
-
-
-//namespace DoAnPC.Models
-//{
-//    using System;
-//    using System.Collections.Generic;
-//    using System.ComponentModel.DataAnnotations;
-//    using System.ComponentModel.DataAnnotations.Schema;
-//    using System.Data.Entity.Spatial;
-
-//    [Table("User")]
-//    public partial class User
-//    {
-//        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-//        public int ID { get; set; }
-
-//        [Required]
-//        [StringLength(30)]
-//        //[Display(Name = "Tài Khoản")]
-//        public string TaiKhoan { get; set; }
-
-//        [Required]
-//        [StringLength(50)]
-//        //[Display(Name = "Họ Tên")]
-//        public string HoTen { get; set; }
-
-//        [Required]
-//        [StringLength(50)]
-//        public string Mail { get; set; }
-
-//        [Required]
-//        [StringLength(30)]
-//        public string MatKhau { get; set; }
-//    }
-//}
-

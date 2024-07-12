@@ -1,13 +1,13 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dụng cụ tái chế thân thiện môi trường</title>
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="~/Content/mystyle.css" />
@@ -17,240 +17,243 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 @{ var user = Session["User"] as DoAnPC.Models.User;}
+@{ var User = HttpContext.Current.Session["User"];}
+
 <body>
+
     <!-- header -->
-    <header>
-        <nav>
-            <div class="content-nav">
-                @{ if (user != null)
-                    {
-                        <li><a style="color:red; text-decoration:none; font-size: 13px;" href="#"><strong>Xin Chào: @user.HoTen</strong> </a></li>
+    <header style="margin-bottom: 90px;">
+        <div class="header">
+            <section class="flex">
 
+                <input type="checkbox" name="" id="toggler">
+                <label for="toggler" class="fas fa-bars"> </label>
+
+                <nav class="navbar">
+                    <a href="~/Products/ProductList">Trang chủ</a>
+
+                        <a href="#">Sản Phẩm</a>
+
+                            @*@{Html.RenderAction("LOAISPPartial", "Categories");}*@
+                    <a href="#contact">Liên hệ</a>
+                    <a href="~/Home/Introduce">Giới Thiệu</a>
+                    <div class="an">
+                        @{ if (user == null)
+                            {
+                                <a href=" @Url.Action("DangKy", "Home")">Đăng Ký</a>
+                                <a href=" @Url.Action("DangNhap", "Home")">Đăng Nhập</a>
+                            }
+                        }
+                        @{ if (user != null)
+                            {
+                                <a href=" @Url.Action("DangXuat", "Home")">Đăng Xuất</a>
+                            }
+                        }
+
+                    </div>
+                </nav>
+                @using (Html.BeginForm("ProductList", "Products", FormMethod.Get))
+                {
+                    <p>
+                        <input type="text" name="SearchString" placeholder="Tìm kiếm sản phẩm..." />
+                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </p>
+                }
+                <button id="cart">
+                    <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+
+                    <a href="~/Cart/GetCartInfo" style="text-decoration:none; color:white; ">Giỏ Hàng</a>
+                    @Html.Action("CartPartial", "Cart")
+                </button>
+
+                <section class="login">
+
+                    @{ if (user == null)
+                        {
+
+                            <a class="btn btn-info" style="text-decoration: none;height:25px;margin-top: 15px;color: black; padding: 2px; font-size: 14px; width: 75px; border-radius: 4px; background: #dfd7d7 " href=" @Url.Action( "DangKy", "Home")">Đăng Ký</a>
+
+                            <a class="btn btn-info" style="text-decoration: none;height:25px;color: black;margin-left:3px;margin-top:15px; padding: 2px; font-size: 14px; border-radius: 4px; background: #dfd7d7 " href=" @Url.Action( "DangNhap", "Home")">Đăng Nhập</a>
+                        }
                     }
-                }
-                <ul>
-                    <li><a href="Header">Trang Chủ</a></li>
-                    <li><a href="#">Sản Phẩm</a></li>
-                    <li><a href="#">Liên Hệ</a></li>
-                    <li><a href="Introduce">Giới Thiệu</a></li>
-                </ul>
-                <form>
-                    <input type="text" name="search" placeholder="Tìm kiếm sản phẩm..." />
-                    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                </form>
+                    @{ if (user != null)
+                        {
 
-            </div>
+                            <a href="~/Home/DangXuat" style="text-decoration: none;margin-right: 20%; ;color: black;font-size:14px;width: 80px ;padding:2px; border-radius:5px; background: #dfd7d7" class=" btn btn-info">Đăng Xuất</a>
 
-
-
-            <!-- The Modal -->
-            <button id="cart">
-                <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-                Giỏ Hàng
-            </button>
-            <div id="myModal" class="modal">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Giỏ Hàng</h5>
-                        <span class="close">&times;</span>
-                    </div>
-                    <div class="modal-body">
-                        <div class="cart-row">
-                            <span class="cart-item cart-header cart-column">Sản Phẩm</span>
-                            <span class="cart-price cart-header cart-column">Giá</span>
-                            <span class="cart-quantity cart-header cart-column">Số Lượng</span>
-                        </div>
-                        <div class="cart-items">
-
-                        </div>
-                        <div class="cart-total">
-                            <strong class="cart-total-title">Tổng Cộng:</strong>
-                            <span class="cart-total-price">0VNĐ</span>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary close-footer">Đóng</button>
-                        <button type="button" class="btn btn-primary order">Thanh Toán</button>
-                    </div>
-                </div>
-            </div>
-            @{ if (user == null)
-                {
-                    <a href="DangKy" style=" text-decoration: none; border-radius: 20px; margin-left: 250px; "><strong>Đăng Ký </strong> | </a>
-                    <a href="DangNhap" style=" text-decoration: none; border-radius: 20px; margin-left: 3px; "><strong>Đăng Nhập</strong></a>
-
-                }
-            }
-            @{ if (user != null)
-                {
-                    <a href="DangXuat" style=" text-decoration: none;  margin-left: 280px; "><strong>Đăng Xuất</strong></a>
-
-                }
-            }
-        </nav>
-
+                        }
+                    }
+                </section>
+            </section>
+        </div>
     </header>
-    <div>
+    <div >
+
         @RenderBody()
     </div>
     <!-- content -->
     <!-- footer -->
     <footer>
         <div class="footer-item">
+            <div class="img-footer">
+                <img src="~/Images/Nhóm 16 (1).png" alt="" />
+            </div>
             <div class="social-footer">
                 <li>
                     <a target="_blank" href="https://www.facebook.com/phatcao.deptry">
                         <i class="fa fa-facebook-square" aria-hidden="true"></i>
                     </a>
                 </li>
+                <li>
+                    <a target="_blank" href="https://github.com/caophat123/DoAnPC">
+                        <i class="fa fa-github-square" aria-hidden="true"></i>
+                    </a>
+                </li>
+            </div>
 
+        </div>
+    </footer>
+    <hr />
+    <section class="underfooter" id="contact">
+
+        <div class="container">
+            <h3 style="text-align: center; font-family: Cambria; font-weight:600;">TRANG BÁN HÀNG CÁC LOẠI SẢN PHẨM THÂN THIỆN VỚI MÔI TRƯỜNG</h3>
+            <div style="text-align: center;"><span><strong style="text-decoration: underline">Email:</strong> caophat.2018@gmail.com</span> &nbsp;&nbsp;&nbsp; <span> <strong style="text-decoration: underline"> Hotline:</strong> 03xxxxxx46</span></div>
+            <div style="text-align: center;">Chúng tôi chuyên cung cấp các sản phẩm thân thiện với môi trường và có thể tái sử dụng, những sản phẩm dễ tái chế và không gây ô nhiễm môi trường.</div>
+            <div>
+                <div style="float: none; width: calc(100% - 70px); text-align: center; padding: 10px 0px; border-top: 1px solid #555; margin: 0px 35px;">
+                    <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+                    <script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-6KG3TVGLY7&amp;l=dataLayer&amp;cx=c"></script>
+                    <script type="text/javascript" async="" src="https://cse.google.com/cse.js?cx=009719991472361915522:mv0hqzomq50"></script>
+                    <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"></script>
+                    <a href="https://www.facebook.com/phatcao.deptry" target="_blank" rel="nofollow">
+                        <i class="fa fa-facebook-f"></i>
+                    </a>
+                    &nbsp;
+                    <a target="_blank" href="https://github.com/caophat123/DoAnPC">
+                        <i class="fa fa-github fa-lg"></i>
+                    </a>
+                    &nbsp;
+                    <i class="fa fa-bullseye fa-lg"></i>
+                </div>
             </div>
 
         </div>
         <p>&copy; @DateTime.Now.Year - Nhóm 16-Lập trình trên web </p>
-    </footer>
 
+    </section>
     <script>
-        // Modal
-        //Phần này là nhúng js vào html
-        //code js này có tác dụng hiển thị giỏ hàng
-        {
-            var modal = document.getElementById("myModal");
-            var btn = document.getElementById("cart");
-            var close = document.getElementsByClassName("close")[0];
-            var close_footer = document.getElementsByClassName("close-footer")[0];
-            var order = document.getElementsByClassName("order")[0];
-            btn.onclick = function () {
-                modal.style.display = "block";
+        let navbar = document.querySelector('.navbar')
+
+        document.querySelector('#menu-bar').onclick = () => {navbar.classList.toggle('active');}
+
+        document.querySelector('#close').onclick = () => {navbar.classList.remove('active');}
+
+        window.onscroll = () => {navbar.classList.remove('active');
+
+            if (window.scrollY > 100) {
+                document.querySelector('header').classList.add('active');
+            } else {
+                document.querySelector('header').classList.remove('active');
             }
-            close.onclick = function () {
-                modal.style.display = "none";
-            }
-            close_footer.onclick = function () {
-                modal.style.display = "none";
-            }
-            order.onclick = function () {
-                alert("Cảm ơn bạn đã thanh toán đơn hàng")
-            }
-            window.onclick = function (event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
+
+        }
+
+        let themeToggler = document.querySelector('#theme-toggler');
+
+        themeToggler.onclick = () => {themeToggler.classList.toggle('fa-sun');
+            if (themeToggler.classList.contains('fa-sun')) {
+                document.querySelector('body').classList.add('active');
+            } else {
+                document.querySelector('body').classList.remove('active');
             }
         }
+
+        document.querySelectorAll('.small-image-1').forEach(images => {images.onclick = () => {document.querySelector('.big-image-1').src = images.getAttribute('src');}});
+
+        document.querySelectorAll('.small-image-2').forEach(images => {images.onclick = () => {document.querySelector('.big-image-2').src = images.getAttribute('src');}});
+
+        document.querySelectorAll('.small-image-3').forEach(images => {images.onclick = () => {document.querySelector('.big-image-3').src = images.getAttribute('src');}});
+
+        let countDate = new Date('aug 1, 2021 00:00:00').getTime();
+
+        function countDown() {
+
+            let now = new Date().getTime();
+            gap = countDate - now;
+
+            let seconds = 1000;
+            let minutes = seconds * 60;
+            let hours = minutes * 60;
+            let days = hours * 24;
+
+            let d = Math.floor(gap / (days));
+            let h = Math.floor((gap % (days)) / (hours));
+            let m = Math.floor((gap % (hours)) / (minutes));
+            let s = Math.floor((gap % (minutes)) / (seconds));
+
+            document.getElementById('days').innerText = d;
+            document.getElementById('hours').innerText = h;
+            document.getElementById('minutes').innerText = m;
+            document.getElementById('seconds').innerText = s;
+
+        }
+
+        setInterval(function () {
+            countDown()
+        }, 1000);
+
+        var swiper = new Swiper(".product-slider", {
+            slidesPerView: 3,
+            loop: true,
+            spaceBetween: 10,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            breakpoints: {
+                0: {
+                    slidesPerView: 1,
+                },
+                550: {
+                    slidesPerView: 2,
+                },
+                800: {
+                    slidesPerView: 3,
+                },
+                1000: {
+                    slidesPerView: 3,
+                },
+            },
+        });
+
+        var swiper = new Swiper(".review-slider", {
+            slidesPerView: 3,
+            loop: true,
+            spaceBetween: 10,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            breakpoints: {
+                0: {
+                    slidesPerView: 1,
+                },
+                550: {
+                    slidesPerView: 2,
+                },
+                800: {
     </script>
 
-    <script>
-        //xóa cart
-        var remove_cart = document.getElementsByClassName("btn-danger");
-        for (var i = 0; i < remove_cart.length; i++) {
-            var button = remove_cart[i]
-            button.addEventListener("click", function (event) {
-                var button_remove = event.target
-                button_remove.parentElement.parentElement.remove()
-                updatecart();
-            })
 
-        }
-
-
-    </script>
-    <script>
-        // update cart
-        function updatecart() {
-            var cart_item = document.getElementsByClassName("cart-items")[0];
-            var cart_rows = cart_item.getElementsByClassName("cart-row");
-            var total = 0;
-            for (var i = 0; i < cart_rows.length; i++) {
-                var cart_row = cart_rows[i]
-                var price_item = cart_row.getElementsByClassName("cart-price ")[0]
-                var quantity_item = cart_row.getElementsByClassName("cart-quantity-input")[0]
-                var price = parseFloat(price_item.innerText)// chuyển một chuổi string sang number để tính tổng tiền.
-                var quantity = quantity_item.value // lấy giá trị trong thẻ input
-                total = total + (price * quantity)
-            }
-            document.getElementsByClassName("cart-total-price")[0].innerText = total + 'VNĐ'
-            // Thay đổi text = total trong .cart-total-price. Chỉ có một .cart-total-price nên mình sử dụng [0].
-
-        }
-
-
-    </script>
-    <script>
-        // thay đổi số lượng sản phẩm
-        var quantity_input = document.getElementsByClassName("cart-quantity-input");
-        for (var i = 0; i < quantity_input.length; i++) {
-            var input = quantity_input[i];
-            input.addEventListener("change", function (event) {
-                var input = event.target
-                if (isNaN(input.value) || input.value <= 0) {
-                    input.value = 1;
-                }
-                updatecart()
-            })
-        }
-    </script>
-    <script>
-        // Thêm vào giỏ
-        var add_cart = document.getElementsByClassName("btn-cart");
-        for (var i = 0; i < add_cart.length; i++) {
-            var add = add_cart[i];
-            add.addEventListener("click", function (event) {
-
-                var button = event.target;
-                var product = button.parentElement.parentElement;
-                var img = product.parentElement.getElementsByClassName("img-prd")[0].src
-                var title = product.getElementsByClassName("content-product-h3")[0].innerText
-                var price = product.getElementsByClassName("price")[0].innerText
-                addItemToCart(title, price, img)
-                // Khi thêm sản phẩm vào giỏ hàng thì sẽ hiển thị modal
-                modal.style.display = "block";
-
-                updatecart()
-            })
-        }
-
-        function addItemToCart(title, price, img) {
-            var cartRow = document.createElement('div')
-            cartRow.classList.add('cart-row')
-            var cartItems = document.getElementsByClassName('cart-items')[0]
-            var cart_title = cartItems.getElementsByClassName('cart-item-title')
-            // Nếu title của sản phẩm bằng với title mà bạn thêm vao giỏ hàng thì sẽ thông cho user.
-            for (var i = 0; i < cart_title.length; i++) {
-                if (cart_title[i].innerText == title) {
-                    alert('Sản Phẩm Đã Có Trong Giỏ Hàng')
-                    return
-                }
-            }
-
-            var cartRowContents = `
-         <div class="cart-item cart-column">
-             <img class="cart-item-image" src="${img}" width="100" height="100">
-             <span class="cart-item-title">${title}</span>
-         </div>
-         <span class="cart-price cart-column">${price}</span>
-         <div class="cart-quantity cart-column">
-             <input class="cart-quantity-input" type="number" value="1">
-             <button class="btn btn-danger" type="button">Xóa</button>
-         </div>`
-            cartRow.innerHTML = cartRowContents
-            cartItems.append(cartRow)
-            cartRow.getElementsByClassName('btn-danger')[0].addEventListener('click', function (event) {
-                var button_remove = event.target
-                button_remove.parentElement.parentElement.remove()
-                updatecart()
-            })
-            cartRow.getElementsByClassName('cart-quantity-input')[0].addEventListener('change', function (event) {
-                var input = event.target
-                if (isNaN(input.value) || input.value <= 0) {
-                    input.value = 1;
-                }
-                updatecart()
-            })
-        }
-    </script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
 </body>
+
 </html>

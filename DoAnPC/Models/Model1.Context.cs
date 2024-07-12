@@ -12,19 +12,25 @@ namespace DoAnPC.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
-    public partial class LoginEntities : DbContext
+
+    public partial class LoginEntities2 : DbContext
     {
-        public LoginEntities()
-            : base("name=LoginEntities")
+        public LoginEntities2()
+            : base("name=LoginEntities2")
         {
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
+        public virtual DbSet<Category> Category { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetail { get; set; }
+        public virtual DbSet<OrderPro> OrderPro { get; set; }
+        public virtual DbSet<Products> Pro { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<Customer> Customer { get; set; }
     }
 }

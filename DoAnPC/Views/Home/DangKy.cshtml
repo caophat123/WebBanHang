@@ -4,21 +4,16 @@
     ViewBag.Title = "DangKy";
     Layout = "~/Views/Shared/MasterLayout.cshtml";
 }
+<div style="background-color: antiquewhite;">
+    <h2 style="margin-left:25%;">Đăng Ký</h2>
 
-<h2 style="margin-left:25%;">Đăng Ký</h2>
-
-@using (Html.BeginForm())
-{
+    @using (Html.BeginForm())
+    {
 
 
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 <div style="margin-left:25%;">
-    <style>
-        body {
-            background-color: antiquewhite;
-            display: flow;
-        }
-    </style>
+
     <div class="form-group">
         @Html.LabelFor(model => model.TaiKhoan, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -34,6 +29,13 @@
             @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "text-danger" })
         </div>
     </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.DiaChi, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+        </div>
+    </div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.Mail, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -43,6 +45,7 @@
         </div>
     </div>
 
+
     <div class="form-group">
         @Html.LabelFor(model => model.MatKhau, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -50,15 +53,27 @@
             @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
         </div>
     </div>
-
+    <div class="form-group">
+        @Html.LabelFor(model => model.NhaplaiMatKhau, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NhaplaiMatKhau, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NhaplaiMatKhau, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Đăng Ký" class="btn btn-default" />
+            <input type="submit" value="Đăng Ký" class="btn btn-warning" />
         </div>
         Bạn đã có tài khoản? <a href="DangNhap" style="text-decoration:none;"> <strong>Đăng Nhập</strong></a>
     </div>
+    <h4 style="margin-left:15%; color: red;background-color: antiquewhite;">@ViewBag.ThongBao</h4>
+
 </div>
-}
+
+    }
+
+</div>
 
 
 @section Scripts {
