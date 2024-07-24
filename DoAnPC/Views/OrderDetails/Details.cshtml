@@ -1,0 +1,68 @@
+﻿@model DoAnPC.Models.OrderDetail
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+<div style="margin-top:70px; width: 60%; float: right; margin-right: 20%; font-size: 15px;">
+
+
+    <div>
+        <h4 style="text-align:center;">CHI TIẾT</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Tên khách hàng :
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.OrderPro.User.HoTen)
+            </dd>
+            <dt>
+                Tên sản phẩm :
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Products.NamePro)
+            </dd>
+
+            <dt>
+                Số lượng :
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Quantity)
+            </dd>
+
+            <dt>
+                Đơn giá :
+            </dt>
+
+            <dd>
+                @String.Format("{0:0,0}", Model.UnitPrice)
+            </dd>
+            <dt>
+                Mail liên hệ :
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.OrderPro.User.Mail)
+            </dd>
+
+            <dt>
+                Địa chỉ :
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.OrderPro.AddressDeliverry)
+            </dd>
+
+
+
+        </dl>
+    </div>
+    <p style="margin-left: 70px;">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new {@class="btn btn-success"}) |
+        @Html.ActionLink("Back to List", "Index",null ,new { @class = "btn btn-danger" })
+    </p>
+</div>

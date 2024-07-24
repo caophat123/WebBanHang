@@ -1,0 +1,54 @@
+﻿@model IEnumerable<DoAnPC.Models.Category>
+    <style>
+        #div-u {
+            
+            background-color: lightpink;
+           
+            flex-direction: column;
+            scrollbar-color: auto;
+            height: 150px;
+            overflow: auto;
+        }
+
+        .div-cate {
+            height: 100%;
+            width: 100px;
+            
+        }
+
+            .div-cate a {
+                color: yellow ;
+                text-decoration: none;
+                font-size: small !important;
+                text-align:left !important;
+                display: inline-block !important;
+            }
+
+                .div-cate a:hover {
+                    color: red;
+                    text-decoration: none;
+                }
+
+       
+
+
+   
+    </style>
+
+    @*<div id="chu">
+
+        <h3 style="color:darkred; text-align:center;">Loại sản phẩm</h3>
+        <li><a href="~/Products/ProductList" style="text-decoration: none; color: yellow; margin-left: 20px;"> Tất cả sản phẩm</a></li>
+    </div>*@
+
+    <ul style="list-style-type: none;" id="div-u">
+        @{
+            foreach (var item in Model)
+            {
+
+                <li class="div-cate">
+                    @Html.ActionLink(item.NameCate, "ProductList", "Products", new { IDCate = item.IDCate }, "")
+                </li>
+            }
+        }
+    </ul>

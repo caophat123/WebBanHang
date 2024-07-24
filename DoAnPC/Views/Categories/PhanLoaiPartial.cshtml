@@ -1,0 +1,78 @@
+﻿@model IEnumerable<DoAnPC.Models.Category>
+<style>
+    #div-u {
+        /* padding-top: 10px;
+            margin-top: 10px;*/
+        background-color: black;
+        text-decoration: none;
+        /*            display: flex;*/
+        flex-direction: column;
+        scrollbar-color: auto;
+        height: 200px;
+        overflow: auto;
+    }
+
+  /*  .div-cate {
+        height: 100%;
+    }
+*/
+        .div-cate a {
+            color: yellow;
+            text-decoration: none;
+            font-size: 10px;
+            text-align: left;
+        }
+
+            .div-cate a:hover {
+                color: red;
+                text-decoration: none;
+            }
+    .dropdown {
+        scrollbar-color: auto;
+        border-radius: 15px;
+        overflow: initial;
+    }
+
+
+
+    .navbar a, .dropdown-content a {
+        float: none;
+        display: block;
+        text-align: left;
+        border-radius: 15px;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        min-width: 100px;
+        z-index: 1;
+        border-radius: 150px;
+        box-shadow: black;
+    }
+
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+        border-radius: 15px;
+        width: 150px;
+    }
+</style>
+<br />
+@*<div id="chu">
+
+        <h3 style="color:darkred; text-align:center;">Loại sản phẩm</h3>
+        <li><a href="~/Products/ProductList" style="text-decoration: none; color: yellow; margin-left: 20px;"> Tất cả sản phẩm</a></li>
+    </div>*@
+
+<ul style="list-style-type: none;" id="div-u">
+    @{
+        foreach (var item in Model)
+        {
+            <li class="div-cate">
+                @Html.ActionLink(item.NameCate, "Index", "Products", new { NameCate = item.NameCate }, "")
+            </li>
+            <hr />
+        }
+    }
+</ul>

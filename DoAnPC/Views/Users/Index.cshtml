@@ -1,0 +1,52 @@
+﻿@model IEnumerable<DoAnPC.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<div style="margin-top:70px; width: 70%; float: right; margin-right: 10%;">
+    <h2 style="text-align:center; font-weight: 600;">TÀI KHOẢN KHÁCH HÀNG</h2>
+   
+    <table class="table table-bordered table-hover table-striped">
+        <tr>
+            <th>
+                <p>Tên đăng nhập</p>
+            </th>
+            <th>
+                <p>Họ Tên</p>
+            </th>
+            <th>
+                <p>Mail</p>
+            </th>
+            <th>
+                <p>Mật Khẩu</p>
+            </th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaiKhoan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoTen)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MatKhau)
+                </td>
+                <td style="text-align: center;">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary" }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "btn btn-success" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+    </div>

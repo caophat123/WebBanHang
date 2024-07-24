@@ -1,0 +1,85 @@
+﻿@using DoAnPC.Models
+@model List<CartItem>
+@{
+    ViewBag.Title = "ConfirmCart";
+    Layout = "~/Views/Shared/MasterLayout.cshtml";
+    User user = Session["User"] as User;
+}
+<div style="margin: 10px auto; width: 80%;">
+    <h2 style="text-align:center; font-weight: 600;">THÔNG TIN GIỎ HÀNG</h2>
+    <table class="table table-bordered">
+        <thead style="text-align:center;">
+            <tr>
+                <th>MÃ SẢN PHẨM</th>
+                <th>TÊN SẢN PHẨM</th>
+                <th>ẢNH</th>
+                <th>SỐ LƯỢNG</th>
+                <th>ĐƠN GIÁ</th>
+                <th>THÀNH TIỀN</th>
+            </tr>
+        </thead>
+        <tbody style="text-align:center;">
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.ProductID</td>
+                    @*<td>  @Html.DisplayFor(model => product.Oder)</td>*@
+
+                    <td>@product.NamePro</td>
+                    <td><img src="~/Images/@product.ImagePro" style="width:150px; height:150px;" /></td>
+                    <td>@product.Number</td>
+                    <td>@String.Format("{0:0,0}", product.Price)đ</td>
+                    <td>@String.Format("{0:0,0}", product.FinalPrice())đ</td>
+                </tr>
+            }
+            <tr style="font-weight:bold; text-align:center;">
+                <td colspan="4" style="color: red;">Tổng số lượng: @ViewBag.TotalNumber</td>
+                <td colspan="5" style="color: red;">Tổng tiền:@String.Format("{0:0,0}", @ViewBag.TotalPrice)đ</td>
+            </tr>
+
+        </tbody>
+    </table>
+    <h2 style="text-align:center; font-weight: 600;">THÔNG TIN KHÁCH HÀNG</h2>
+    @using (Html.BeginForm("AgreeCart", "Cart"))
+    {
+        <table class="table table-bordered" style="font-weight:600;">
+            <tr>
+                <td>NAME: </td>
+                <td>@user.HoTen</td>
+            </tr>
+            <tr>
+                <td>EMAIL: </td>
+                <td>@user.Mail</td>
+            </tr>
+            <tr>
+                <td>Địa chỉ giao hàng: </td>
+                <td>@user.DiaChi</td>
+            </tr>
+            <tr>
+                <td>DATE: </td>
+                <td>@DateTime.Now.ToShortDateString()</td>
+            </tr>
+
+            <tr>
+                <td colspan="2" style="text-align: center;">
+
+                    @Html.ActionLink("ĐẶT HÀNG", "AgreeCart", null, new { @class = "btn btn-primary AgreeCart" })
+                    @Html.ActionLink("QUAY LẠI", "GetCartInfo", null, new { @class = "btn btn-warning" })
+                </td>
+            </tr>
+        </table>
+    }
+
+</div>
+<script>
+    var AgreeCart = document.getElementsByClassName("AgreeCart")[0];
+  
+        AgreeCart.onclick = function () {
+            alert("Cảm ơn bạn iu đã thanh toán đơn hàng <3 ");
+    }
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>

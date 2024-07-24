@@ -1,0 +1,70 @@
+﻿@model IEnumerable<DoAnPC.Models.Products>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+
+<div style="margin: 10px auto; width: 80%; float: right; margin-right: 1%;">
+    <h2 style="text-align: center; margin-top: 50px;">THÔNG TIN PRODUCTS</h2>
+    <p>
+        @Html.ActionLink("TẠO MỚI", "Create", null, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Quay Lại", "Index", "Admin", null, new { @class = "btn btn-danger" })
+        <div class="dropdown" style="border-radius:15px;">
+            <input type="submit" value="Phân Loại SP" class="btn btn-success" />
+            <div class="dropdown-content">
+                @{ Html.RenderAction("PhanLoaiPartial", "Categories");}
+
+            </div>
+        </div>
+    </p>
+    
+    <table class="table">
+        <tr>
+            <th>
+                TÊN SẢN PHẨM
+            </th>
+
+            <th>
+                GIÁ
+            </th>
+            <th>
+                MÔ TẢ
+            </th>
+            <th>
+                HÌNH
+            </th>
+            <th>
+                CATEGORY
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="width: 200px;">
+                    @Html.DisplayFor(modelItem => item.NamePro)
+                </td>
+
+                <td>
+                     @String.Format("{0:0,0}", item.Price)đ
+                </td>
+                <td style="width: 200px; word-break: break-all;">
+                    @Html.DisplayFor(modelItem => item.DecriptionPro)
+                </td>
+                <td style="width: 250px; word-break: break-all;">
+                    @Html.DisplayFor(modelItem => item.ImagePro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category1.NameCate)
+                </td>
+                <td>
+                    @Html.ActionLink("Sửa", "Edit", new { id = item.ProductID }, new { @class = "btn btn-success" }) |
+                    @*@Html.ActionLink("Chi tiết", "Details", new { id = item.ProductID }, new { @class = "btn btn-primary" }) |*@
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.ProductID }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </table>
+</div>

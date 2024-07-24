@@ -1,0 +1,39 @@
+﻿@model DoAnPC.Models.Category
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<div style="margin-top:70px; width: 60%; float: right; margin-right: 20%;">
+    <h3 style="text-align:center">
+        BẠN CÓ CHẮC CHẮN MUỐN XÓA CATEGORY
+        NÀY?
+    </h3>
+    <div style="margin-left: 20%; margin-top: 50px;">
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                MÃ CATEGORY :
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.IDCate)
+            </dd>
+            <dt style="margin-left: 4px;">
+                TÊN CATEGORY :
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.NameCate)
+            </dd>
+        </dl>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Id)
+    <div class="form-actions no-color" style="margin-left: 40px;">
+        <input type="submit" value="Xóa" class="btn btn-success" /> |
+        @Html.ActionLink("TRỞ LẠI", "Index", null, new { @class = "btn btn-danger" })
+    </div>
+        }
+    </div>
+</div>

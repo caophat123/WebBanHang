@@ -1,0 +1,147 @@
+﻿body {
+    margin: 0;
+    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Times New Roman';
+}
+
+#div-header {
+    display: flex;
+    flex-direction: row;
+    height: 70px;
+    padding: 0 0 0 250px;
+}
+
+#main1, #left, #center, #right {
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    width: 100%;
+}
+
+#left {
+    width: 20%;
+    font-family: Arial;
+    font-size: 20px;
+    background-color: white;
+}
+
+#center {
+    width: 70%;
+    background-color: #aae0ff;
+    border-radius: 30px;
+    height: 50px;
+    padding: 10px;
+    border: 1px solid #699BF7;
+}
+
+#right {
+    width: 10%;
+    background-color: white;
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: #aae0ff;
+    padding: 0 0 0 210px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+    .topnav a {
+        float: left;
+        display: block;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 0 16px;
+        text-decoration: none;
+    }
+
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+#div-main {
+    display: flex;
+    flex-direction: row;
+}
+
+#div-left {
+    width: 20%;
+    height: auto;
+    font-family: Arial;
+    font-size: 20px;
+    background-color: #aae0ff;
+    border: 1px solid #699BF7;
+}
+
+    #div-left h3 {
+        text-align: center;
+    }
+
+#div-contain {
+    width: 70%;
+    height: 600px;
+    background-color: white;
+}
+
+#div-right {
+    width: 10%;
+    height: 450px;
+    background-color: white;
+}
+
+#div-footer {
+    height: auto;
+    background-color: black;
+    bottom: 0px;
+    text-align: center;
+    padding-top: 25px;
+}
+
+.listchung {
+    list-style-type: none;
+    margin: 0;
+    padding: 10px 0 10px 30px;
+    width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.btn-group {
+    color: black;
+    border: 1px solid white;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: white;
+    padding-bottom: 10px;
+}
+
+
+
+.card-img-top {
+    width: 200px;
+    height: 200px;
+}
+
+.btn-group:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+.lichung a {
+    display: block;
+    color: #aae0ff;
+    text-decoration: none;
+    padding: 20px 0 0 20px;
+}
+
+    .lichung a:hover {
+        background-color: #aae0ff;
+        color: white;
+    }
+
+.lichung p {
+    color: #699BF7;
+    font-size: 15px;
+}

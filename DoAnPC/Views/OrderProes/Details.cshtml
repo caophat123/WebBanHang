@@ -1,0 +1,61 @@
+﻿@model DoAnPC.Models.OrderPro
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<div style="margin-top:70px; width: 70%; float: right; margin-right: 5%; ">
+    <h2 style="text-align:center;">CHI TIẾT</h2>
+
+    <div>
+        <h4>OrderPro</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Tên đăng nhập :
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.User.TaiKhoan)
+            </dd>
+
+            <dt>
+                Khách Hàng :
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.User.HoTen)
+            </dd>
+            <dt>
+                Email :
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.User.Mail)
+            </dd>
+
+            <dt>
+                Ngày đặt hàng :
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DateOrder)
+            </dd>
+
+            <dt>
+                Địa chỉ :
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AddressDeliverry)
+            </dd>
+
+
+
+
+
+        </dl>
+    </div>
+    <p style="margin-left:60px;">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new {@class="btn btn-success"}) |
+        @Html.ActionLink("Back to List", "Index", null, new {@class= "btn btn-danger"})
+    </p>
+    </div>

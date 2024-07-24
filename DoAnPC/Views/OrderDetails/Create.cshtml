@@ -1,0 +1,64 @@
+﻿@model DoAnPC.Models.OrderDetail
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+
+<div style="margin-top:70px; width: 60%; float: right; margin-right: 20%;">
+
+    @using (Html.BeginForm())
+    {
+        <h4 class="mb-4" style="text-align: center; font-weight: 500;">CREATE</h4>
+        <hr />
+        @Html.AntiForgeryToken()
+
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.IDProduct, "Loại sản phẩm", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("IDProduct", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IDProduct, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.IDOrder, "Địa chỉ", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("IDOrder", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IDOrder, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Quantity,"Số lượng" ,htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.UnitPrice,"Đơn giá" ,htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UnitPrice, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-success" /> |
+                    @Html.ActionLink("Back to List", "Index", null, new {@class="btn btn-danger"})
+
+                </div>
+            </div>
+        </div>
+    }
+
+    
+</div>
+

@@ -1,0 +1,79 @@
+﻿@model DoAnPC.Models.Products
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/MasterLayout.cshtml";
+}
+
+
+<body style="background-color: #fbe2e2; ">
+    <main role="main">
+        <!-- Block content - Đục lỗ trên giao diện bố cục chung, đặt tên là `content` -->
+        <div class="container mt-4">
+            <div id="thongbao" class="alert alert-danger d-none face" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+
+            <div class="card">
+                <div class="container-fliud">
+
+                    <div class="wrapper row" style="background-color: #fbe2e2">
+                        <div class="preview col-md-6">
+
+                            <ul class="preview-thumbnail nav nav-tabs">
+                                <li class="active">
+                                    <a data-target="#pic-1" data-toggle="tab" class="">
+                                        <img src="~/Images/@Model.ImagePro" style="width: 450px; height:400px;border-radius:15px;" />
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="details col-md-6">
+                            <h3 class="product-title">
+                                @Html.DisplayFor(model => model.NamePro)
+                            </h3>
+                            <div class="rating">
+                                <div class="stars">
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                </div>
+                                <span class="review-no">999 reviews</span>
+                            </div>
+                            <p class="product-description">
+                                @Html.DisplayFor(model => model.DecriptionPro)
+                            </p>
+                            <small class="text-muted">Giá cũ: <s><span>50,990vnđ</span></s></small>
+                            <h4 class="price">
+                                <span>
+                                    <td>@String.Format("{0:0,0}", Model.Price)đ</td>
+                                </span>
+                            </h4>
+                            <p class="vote">
+                                <strong>100%</strong> hàng <strong>Chất lượng</strong>, đảm bảo
+                                <strong>
+                                    Uy
+                                    tín
+                                </strong>!
+                            </p>
+                            <div class="action">
+                                @Html.ActionLink("Quay lại", "ProductList", "Products", new { @class = "btn btn-success" })
+                                <a class="btn btn-danger" href=" @Url.Action( "AddToCart", "Cart", new { id = Model.ProductID })">Thêm vào giỏ</a>
+
+                                <a class="like btn btn-default" href="#"><span class="fa fa-heart"></span></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- End block content -->
+    </main>
+</body>

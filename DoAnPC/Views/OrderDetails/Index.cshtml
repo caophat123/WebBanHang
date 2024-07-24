@@ -1,0 +1,85 @@
+﻿@model IEnumerable<DoAnPC.Models.OrderDetail>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<div style="margin-top:70px; float: right; margin-right:5%;">
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="mb-4" style="text-align:center; font-weight:600; margin-top: 20px;">DANH SÁCH ĐƠN HÀNG</h2>
+                @*<div class="mb-3">
+                    @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary" })
+                </div>*@
+                <br />
+                <table class="table table-bordered table-hover table-striped">
+                    <tr>
+
+                        <th>
+                            <p>Mã vận đơn</p>
+                        </th>
+                        <th>
+                            <p>Tên Khách hàng</p>
+                        </th>
+
+                        <th>
+                            <p>Tên sản phẩm</p>
+                        </th>
+                        <th>
+                            <p>Số lượng</p>
+                        </th>
+                        <th>
+                            <p>Đơn giá</p>
+                        </th>
+                       
+                        <th>
+                            <p>Địa chỉ giao hàng</p>
+                        </th>
+
+                        @*<th>
+            <p>Tên khách hàng</p>
+        </th>*@
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IDOrder)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OrderPro.User.HoTen)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Products.NamePro)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Quantity)
+                            </td>
+                            <td>
+                                @String.Format("{0:0,0}", item.UnitPrice)
+                            </td>
+                          
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OrderPro.AddressDeliverry)
+                            </td>
+
+
+                            <td style="text-align:center">
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary" }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "btn btn-success" }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-danger" })
+
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

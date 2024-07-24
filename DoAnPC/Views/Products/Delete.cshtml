@@ -1,0 +1,58 @@
+﻿@model DoAnPC.Models.Products
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<div style="margin-top:70px; width: 60%; float: right; margin-right: 20%;">
+    <h3 style="text-align:center">BẠN CÓ CHẮC CHẮN MUỐN XÓA SẢN PHẨM NÀY?</h3>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                TÊN SẢN PHẨM :
+
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NamePro)
+            </dd>
+            <dt>
+                MÔ TẢ :
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DecriptionPro)
+            </dd>
+            <dt>
+
+                GIÁ :
+            </dt>
+            <dd>
+                @String.Format("{0:0,0}", Model.Price)đ
+            </dd>
+
+            <dt>
+                NHÓM SẢN PHẨM :
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Category1.NameCate)
+            </dd>
+            <dt>
+                HÌNH ẢNH :
+            </dt>
+            <dd>
+                <img src="~/Images/@Model.ImagePro" />
+            </dd>
+        </dl>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-actions no-color">
+                <input type="submit" value="Xóa" class="btn btn-success" /> |
+                @Html.ActionLink("TRỞ LẠI", "Index", null, new { @class = "btn btn-danger" })
+            </div>
+        }
+    </div>
+</div>
+

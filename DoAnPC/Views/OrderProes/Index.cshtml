@@ -1,0 +1,68 @@
+﻿@model IEnumerable<DoAnPC.Models.OrderPro>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+
+<div style="margin-top:70px; width: 70%; float: right; margin-right: 10%;">
+    <h2 style="text-align:center; font-weight: 600;">KHÁCH HÀNG</h2>
+
+    <p>
+        @Html.ActionLink("Thêm Mới", "Create", null, new {@class="btn btn-primary"})
+    </p>
+    
+        <table class="table table-bordered table-hover table-striped">
+            <tr>
+                <th>
+                    <p>Tên đăng nhập</p>
+                </th>
+                <th>
+                    <p>Khách Hàng</p>
+                </th>
+                <th>
+                    <p>Email</p>
+                </th>
+                <th>
+                    <p>Ngày đặt hàng</p>
+                </th>
+                <th>
+                    <p>Địa chỉ giao hàng</p>
+                </th>
+
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.TaiKhoan)
+                    </td>
+                    <td style="width: 150px; word-break: break-all;">
+                        @Html.DisplayFor(modelItem => item.User.HoTen)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.Mail)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateOrder)
+                    </td>
+                    <td style="width: 150px; word-break: break-all;">
+                        @Html.DisplayFor(modelItem => item.AddressDeliverry)
+                    </td>
+
+
+                    <td style="text-align: center;">
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary" }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "btn btn-success" }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+        
+</div>

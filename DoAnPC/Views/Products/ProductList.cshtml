@@ -1,0 +1,225 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<DoAnPC.Models.Products>
+
+@*@model IEnumerable<DoAnPC.Models.Products>*@
+
+@{
+    ViewBag.Title = "ProductList";
+    Layout = "~/Views/Shared/MasterLayout.cshtml";
+}
+<link rel="stylesheet" href="~/Content/SPstyle.css">
+<link rel="stylesheet" href="~/Content/mystyle.css">
+
+<link rel="stylesheet" href="~/Content/PagedList.css">
+
+    <div style="background-color: white;">
+
+        <div>
+            <h3 style="text-align:center; font-weight:500;">Welcome To Website</h3>
+        </div>
+        <div class="slideshow-container" style="width: 100%;">
+            <div class="mySlides fade">
+                <img src="~/Images/sl.png" style="width: 100%; height:550px;">
+
+            </div>
+
+            <div class="mySlides fade">
+                <img src="https://vnecofriendly.com/wp-content/uploads/2022/01/cover-191028-1600x600.jpeg" style="width: 100%; height: 550px ">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="https://baobitdp.vn/wp-content/uploads/2022/12/Bao-bi-sinh-hoc-phan-huy-hoan-toan.jpg" style="width: 100%; height: 550px; ">
+            </div>
+        </div>
+        <br>
+        
+
+
+        <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(0)"></span>
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+        </div>
+        <div>
+            <h3 style="text-align:center; font-weight:500;">Một số sản phẩm tiêu biểu</h3>
+        </div>
+           
+                <section class="products">
+                    <div class="box-container" style="justify-content: center;">
+                        @foreach (var pro in Model)
+                        {
+                            <div class="box" >
+                                <div class="image">
+                                    <img src="~/Images/@pro.ImagePro" alt="" />
+                                    
+                                </div>
+                                <div class="content">
+                                    <h7>
+                                        <div style="font-weight:700">
+                                            @Html.DisplayFor(model => pro.NamePro)
+                                        </div>
+                                        <div class="price">
+                                            @String.Format("{0:0,0}", pro.Price)đ
+                                        </div>
+                                        @Html.ActionLink("Chi tiết", "Details", new { id = pro.ProductID }, new { @class = "btn btn-primary" })
+                                        <a class="btn btn-danger" href=" @Url.Action( "AddToCart", "Cart", new { id = pro.ProductID })">Thêm vào giỏ</a>
+                                    </h7>
+                                </div>
+                            </div>
+
+                        }
+                        </div>
+                </section>
+        <script>
+            //khai báo biến slideIndex đại diện cho slide hiện tại
+            var slideIndex;
+            // KHai bào hàm hiển thị slide
+            function showSlides() {
+                var i;
+                var slides = document.getElementsByClassName("mySlides");
+                var dots = document.getElementsByClassName("dot");
+                for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                }
+                for (i = 0; i < dots.length; i++) {
+                    dots[i].className = dots[i].className.replace(" active", "");
+                }
+
+                slides[slideIndex].style.display = "block";
+                dots[slideIndex].className += " active";
+                //chuyển đến slide tiếp theo
+                slideIndex++;
+                //nếu đang ở slide cuối cùng thì chuyển về slide đầu
+                if (slideIndex > slides.length - 1) {
+                    slideIndex = 0
+                }
+                //tự động chuyển đổi slide sau 5s
+                setTimeout(showSlides, 5000);
+            }
+            //mặc định hiển thị slide đầu tiên
+            showSlides(slideIndex = 0);
+
+
+            function currentSlide(n) {
+                showSlides(slideIndex = n);
+            }
+        </script>
+
+
+
+
+    </div>
+
+    <style>
+        .hr::after {
+            content: '';
+            display: block;
+            border-bottom: 1px solid #999;
+            margin: 20px auto; /* Canh giữa theo chiều ngang và thêm khoảng cách dưới */
+            clear: both; /* Đảm bảo "clear both" */
+        }
+    </style>
+    <div class="hr">
+    </div>
+
+
+    <header class="featured-section-header clearfix featured-blog-posts-header">
+        <h3 class="featured-category-title" style="margin-left:12px;text-align:center;">Blog News</h3>
+        <span class="readMore" style="float:right; margin-right:10px;">
+            <a href="https://growgreen.com.vn/blog/">View All</a>
+        </span>
+    </header>
+
+    <div class="featured-blog-posts-container clearfix">
+        <article class="featured-blog-post">
+            <div class="featured-blog-post-inner">
+                <a href="https://growgreen.com.vn/hon-20-000-cay-go-lon-duoc-trong-de-ung-pho-voi-bien-doi-khi-hau/" title="Hơn 20.000 cây gỗ lớn được trồng để ứng phó với biến đổi khí hậu" class="featured-image">
+                    <img width="370" height="200" src="https://growgreen.com.vn/wp-content/uploads/2023/03/Gaia-trồng-cây-370x200.jpg" class="attachment-widgetfull size-widgetfull wp-post-image" alt="nguoi dan trong cay" decoding="async" loading="lazy" title="">
+                </a>
+                <header class="featured-blog-post-header">
+                    <h4 class="title featured-blog-post-title">
+                        <a href="https://growgreen.com.vn/hon-20-000-cay-go-lon-duoc-trong-de-ung-pho-voi-bien-doi-khi-hau/" title="Hơn 20.000 cây gỗ lớn được trồng để ứng phó với biến đổi khí hậu">Hơn 20.000 cây gỗ lớn được trồng để ứng phó với biến đổi khí hậu</a>
+                    </h4>
+                </header>
+                <div class="post-excerpt">Nằm trong chuỗi hoạt động hưởng ứng Ngày thế giới trồng cây (21/03/2023)&nbsp;…</div>
+                <div class="blog-post-info">
+                    <div class="thetime updated"><span>Tháng Ba 17, 2023</span></div>
+                    <div class="readMore">
+                        <a href="https://growgreen.com.vn/hon-20-000-cay-go-lon-duoc-trong-de-ung-pho-voi-bien-doi-khi-hau/" title="Hơn 20.000 cây gỗ lớn được trồng để ứng phó với biến đổi khí hậu">
+                            Read More
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <article class="featured-blog-post">
+            <div class="featured-blog-post-inner">
+                <a href="https://growgreen.com.vn/uu-nhuoc-diem-cua-ong-hut-gao-va-dia-chi-mua-ong-hut-gao-gia-si/" title="Ưu Nhược Điểm Của Ống Hút Gạo" class="featured-image">
+                    <img width="370" height="200" src="https://growgreen.com.vn/wp-content/uploads/2023/02/Ưu-nhược-điểm-của-ống-hút-gạo-370x200.jpg" class="attachment-widgetfull size-widgetfull wp-post-image" alt="ong hut gao dung voi nuoc trai cay" decoding="async" loading="lazy" title="">
+                </a>
+                <header class="featured-blog-post-header">
+                    <h4 class="title featured-blog-post-title">
+                        <a href="https://growgreen.com.vn/uu-nhuoc-diem-cua-ong-hut-gao-va-dia-chi-mua-ong-hut-gao-gia-si/" title="Ưu Nhược Điểm Của Ống Hút Gạo">Ưu Nhược Điểm Của Ống Hút Gạo</a>
+                    </h4>
+                </header>
+                <div class="post-excerpt">Ống hút gạo hay còn gọi là ống hút ngũ cốc là sản phẩm được&nbsp;…</div>
+                <div class="blog-post-info">
+                    <div class="thetime updated"><span>Tháng Hai 23, 2023</span></div>
+                    <div class="readMore">
+                        <a href="https://growgreen.com.vn/uu-nhuoc-diem-cua-ong-hut-gao-va-dia-chi-mua-ong-hut-gao-gia-si/" title="Ưu Nhược Điểm Của Ống Hút Gạo">
+                            Read More
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <article class="featured-blog-post">
+            <div class="featured-blog-post-inner">
+                <a href="https://growgreen.com.vn/ha-noi-nguoi-dan-se-duoc-trai-nghiem-xe-dap-cong-cong-tu-quy-iv-2022/" title="Hà Nội: Người dân sẽ được trải nghiệm xe đạp công cộng từ quý IV/2022" class="featured-image">
+                    <img width="370" height="200" src="https://growgreen.com.vn/wp-content/uploads/2022/06/xe-dap-cong-cong-370x200.jpg" class="attachment-widgetfull size-widgetfull" alt="xe dap cong cong" decoding="async" loading="lazy" title="">
+
+                </a>
+                <header class="featured-blog-post-header">
+                    <h4 class="title featured-blog-post-title">
+                        <a href="https://growgreen.com.vn/ha-noi-nguoi-dan-se-duoc-trai-nghiem-xe-dap-cong-cong-tu-quy-iv-2022/" title="Hà Nội: Người dân sẽ được trải nghiệm xe đạp công cộng từ quý IV/2022">Hà Nội: Người dân sẽ được trải nghiệm xe đạp công cộng từ quý IV/2022</a>
+                    </h4>
+                </header>
+                <div class="post-excerpt">Sở Giao Thông Vận Tải (GTVT) Hà Nội vừa “chốt” gần 200 điểm trạm cho&nbsp;…</div>
+                <div class="blog-post-info">
+                    <div class="thetime updated"><span>Tháng Sáu 16, 2022</span></div>
+                    <div class="readMore">
+                        <a href="https://growgreen.com.vn/ha-noi-nguoi-dan-se-duoc-trai-nghiem-xe-dap-cong-cong-tu-quy-iv-2022/" title="Hà Nội: Người dân sẽ được trải nghiệm xe đạp công cộng từ quý IV/2022">
+                            Read More
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <article class="featured-blog-post">
+            <div class="featured-blog-post-inner">
+                <a href="https://growgreen.com.vn/ong-hut-giay-hai-duong-gia-si-cho-quan-ca-phe-nha-hang-khach-san/" title="ỐNG HÚT GIẤY HẢI DƯƠNG GIÁ SỈ CHO QUÁN CÀ PHÊ, NHÀ HÀNG, KHÁCH SẠN" class="featured-image">
+                    <img width="370" height="200" src="https://growgreen.com.vn/wp-content/uploads/2022/05/Ống-hút-giấy-Hải-Dương-giá-sỉ-370x200.jpg" class="attachment-widgetfull size-widgetfull wp-post-image" alt="ống hút giấy Hải Dương" decoding="async" loading="lazy" title="">
+                </a>
+                <header class="featured-blog-post-header">
+                    <h4 class="title featured-blog-post-title">
+                        <a href="https://growgreen.com.vn/ong-hut-giay-hai-duong-gia-si-cho-quan-ca-phe-nha-hang-khach-san/" title="ỐNG HÚT GIẤY HẢI DƯƠNG GIÁ SỈ CHO QUÁN CÀ PHÊ, NHÀ HÀNG, KHÁCH SẠN">ỐNG HÚT GIẤY HẢI DƯƠNG GIÁ SỈ CHO QUÁN CÀ PHÊ, NHÀ HÀNG, KHÁCH SẠN</a>
+                    </h4>
+                </header>
+                <div class="post-excerpt">Bạn đang sở hữu quán cà phê xinh xắn, có phong cách tại Hải Dương?&nbsp;…</div>
+                <div class="blog-post-info">
+                    <div class="thetime updated"><span>Tháng Năm 13, 2022</span></div>
+                    <div class="readMore">
+                        <a href="https://growgreen.com.vn/ong-hut-giay-hai-duong-gia-si-cho-quan-ca-phe-nha-hang-khach-san/" title="ỐNG HÚT GIẤY HẢI DƯƠNG GIÁ SỈ CHO QUÁN CÀ PHÊ, NHÀ HÀNG, KHÁCH SẠN">
+                            Read More
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+<!-- Thêm đoạn mã để hiển thị số trang và số trang hiện tại -->
+Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber ) / @Model.PageCount
+
+<!--Control PagedListPager: mô tả mô hình với số trang là liên kết với tham số "Index" và tham số page-->
+@Html.PagedListPager(Model, page => Url.Action("ProductList", new { page }))
+<!-- Kết thúc -->
